@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maison Lior — Boutique 6 écrans</title>
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="boutique.css">
+<style>
+  /* Make the design canvas background match the brand neutrals */
+  body { background: #EFECE6; }
+  /* Each artboard is a fixed-width screen; .ml-screen can grow tall */
+  .ml-screen { width: 1440px; background: #fff; min-height: 100%; display: block; }
+  /* Hide horizontal scroll inside artboards */
+  .ml-screen { overflow: hidden; }
+  /* Adjust nav inner width to feel right at 1440px */
+  .ml-screen .ml-nav__inner { max-width: 1024px; }
+  /* The cart screen needs the drawer to overlap its own content; ensure positioning context */
+  .ml-screen--cart { position: relative; }
+  /* For PDP & checkout, give a slightly wider container in mock */
+  .ml-screen .ml-container { max-width: 1280px; }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="components/shared.jsx"></script>
+<script type="text/babel" src="components/HomeScreen.jsx"></script>
+<script type="text/babel" src="components/BoutiqueScreen.jsx"></script>
+<script type="text/babel" src="components/PDPScreen.jsx"></script>
+<script type="text/babel" src="components/CommerceScreens.jsx"></script>
+
+<script type="text/babel">
+const { HomeScreen, BoutiqueScreen, PDPScreen, CartDrawerScreen, CheckoutScreen, ConfirmationScreen } = window;
+
+function App() {
+  return (
+    <DesignCanvas
+      title="Maison Lior — Boutique en ligne"
+      subtitle="6 écrans · Desktop 1440px · Style Apple, raffiné, intemporel"
+    >
+      <DCSection id="parcours" title="Parcours d'achat" subtitle="Découverte → catalogue → produit → panier → commande → confirmation">
+        <DCArtboard id="01-home"      label="01 · Home"             width={1440} height={3400}><HomeScreen/></DCArtboard>
+        <DCArtboard id="02-boutique"  label="02 · Boutique"         width={1440} height={2400}><BoutiqueScreen/></DCArtboard>
+        <DCArtboard id="03-pdp"       label="03 · Fiche produit"    width={1440} height={2400}><PDPScreen/></DCArtboard>
+      </DCSection>
+      <DCSection id="checkout" title="Tunnel de commande" subtitle="Du panier au retrait en boutique">
+        <DCArtboard id="04-cart"      label="04 · Panier (drawer)"  width={1440} height={1500}><CartDrawerScreen/></DCArtboard>
+        <DCArtboard id="05-checkout"  label="05 · Commande"         width={1440} height={1900}><CheckoutScreen/></DCArtboard>
+        <DCArtboard id="06-confirm"   label="06 · Confirmation"     width={1440} height={1980}><ConfirmationScreen/></DCArtboard>
+      </DCSection>
+    </DesignCanvas>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

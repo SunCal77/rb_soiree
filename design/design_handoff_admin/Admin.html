@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maison Lior — Administration</title>
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="boutique.css">
+<link rel="stylesheet" href="admin.css">
+<style>
+  body { background: #E8E6E1; }
+  /* Artboards: admin screens are inner web pages — let them set their own width via .adm-screen--desktop / --mobile */
+  .adm-screen { display: flex; }
+  .adm-screen--desktop { width: 1440px; }
+  .adm-screen--mobile  { width: 375px; }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="components/shared.jsx"></script>
+<script type="text/babel" src="components/admin/shared.jsx"></script>
+<script type="text/babel" src="components/admin/screens-1.jsx"></script>
+<script type="text/babel" src="components/admin/screens-2.jsx"></script>
+<script type="text/babel" src="components/admin/screens-3.jsx"></script>
+
+<script type="text/babel">
+const {
+  LoginScreen,
+  DashboardDesktop, DashboardMobile,
+  ProductsListDesktop, ProductsListMobile,
+  ProductEditDesktop, ProductEditMobile,
+  CategoriesDesktop, CategoriesMobile,
+  OrdersListDesktop, OrdersListMobile,
+  OrderDetailDesktop, OrderDetailMobile,
+  SettingsDesktop, SettingsMobile,
+} = window;
+
+function App() {
+  return (
+    <DesignCanvas
+      title="Maison Lior — Administration"
+      subtitle="8 écrans · Mobile-first · Desktop 1440 + Mobile 375 · Style Apple"
+    >
+      <DCSection id="auth" title="Accès" subtitle="Authentification de la propriétaire">
+        <DCArtboard id="01-login-d" label="01 · Connexion · Desktop" width={1440} height={900}><LoginScreen/></DCArtboard>
+        <DCArtboard id="01-login-m" label="01 · Connexion · Mobile"  width={375}  height={812}><LoginScreen mobile/></DCArtboard>
+      </DCSection>
+
+      <DCSection id="overview" title="Vue d'ensemble" subtitle="Tableau de bord et activité du jour">
+        <DCArtboard id="02-dash-d" label="02 · Tableau de bord · Desktop" width={1440} height={1700}><DashboardDesktop/></DCArtboard>
+        <DCArtboard id="02-dash-m" label="02 · Tableau de bord · Mobile"  width={375}  height={1180}><DashboardMobile/></DCArtboard>
+      </DCSection>
+
+      <DCSection id="catalogue" title="Catalogue" subtitle="Produits, édition, catégories et attributs">
+        <DCArtboard id="03-products-d" label="03 · Liste produits · Desktop" width={1440} height={1180}><ProductsListDesktop/></DCArtboard>
+        <DCArtboard id="03-products-m" label="03 · Liste produits · Mobile"  width={375}  height={1100}><ProductsListMobile/></DCArtboard>
+        <DCArtboard id="04-edit-d" label="04 · Édition produit · Desktop" width={1440} height={2400}><ProductEditDesktop/></DCArtboard>
+        <DCArtboard id="04-edit-m" label="04 · Édition produit · Mobile"  width={375}  height={1700}><ProductEditMobile/></DCArtboard>
+        <DCArtboard id="05-cats-d" label="05 · Catégories & attributs · Desktop" width={1440} height={900}><CategoriesDesktop/></DCArtboard>
+        <DCArtboard id="05-cats-m" label="05 · Catégories & attributs · Mobile"  width={375}  height={620}><CategoriesMobile/></DCArtboard>
+      </DCSection>
+
+      <DCSection id="orders" title="Commandes" subtitle="Pilotage du flux Click & collect">
+        <DCArtboard id="06-orders-d" label="06 · Commandes · Desktop" width={1440} height={1240}><OrdersListDesktop/></DCArtboard>
+        <DCArtboard id="06-orders-m" label="06 · Commandes · Mobile"  width={375}  height={1240}><OrdersListMobile/></DCArtboard>
+        <DCArtboard id="07-orderd-d" label="07 · Détail commande · Desktop" width={1440} height={1280}><OrderDetailDesktop/></DCArtboard>
+        <DCArtboard id="07-orderd-m" label="07 · Détail commande · Mobile"  width={375}  height={1180}><OrderDetailMobile/></DCArtboard>
+      </DCSection>
+
+      <DCSection id="settings" title="Réglages" subtitle="Boutique, livraison, paiement">
+        <DCArtboard id="08-settings-d" label="08 · Paramètres · Desktop" width={1440} height={1180}><SettingsDesktop/></DCArtboard>
+        <DCArtboard id="08-settings-m" label="08 · Paramètres · Mobile"  width={375}  height={620}><SettingsMobile/></DCArtboard>
+      </DCSection>
+    </DesignCanvas>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

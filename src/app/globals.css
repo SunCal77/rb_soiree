@@ -1,0 +1,40 @@
+@import "tailwindcss";
+@import "../styles/tokens.css";
+@import "../styles/boutique.css";
+
+/* Pull Tailwind theme tokens from our design tokens so utility classes
+   (text-fg, bg-bg-soft, font-display, etc.) match the design system. */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-soft: var(--bg-secondary);
+  --color-fg: var(--fg);
+  --color-fg-secondary: var(--fg-secondary);
+  --color-fg-tertiary: var(--fg-tertiary);
+  --color-border: var(--border);
+  --color-accent-warm: var(--accent-warm);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+  --font-display: var(--font-inter), -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif;
+}
+
+/* Wire Inter from next/font (loaded in layout.tsx) into the design tokens
+   so every existing CSS rule keyed off --font-body / --font-display picks
+   it up automatically. */
+:root {
+  --font-body: var(--font-inter), -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+  --font-display: var(--font-inter), -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif;
+}
+
+html, body { min-height: 100%; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--fg); }
+
+/* Invisible scrollbar across the storefront — content still scrolls. */
+html { scrollbar-width: none; -ms-overflow-style: none; }
+::-webkit-scrollbar { width: 0; height: 0; background: transparent; }
+
+/* Vertically center the hero copy + CTAs (handoff CSS pinned them near the
+   top with padding-top: 88px). */
+.ml-hero__content { padding-top: 0; justify-content: center; }

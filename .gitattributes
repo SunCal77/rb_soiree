@@ -1,0 +1,9 @@
+# Normalise les fins de ligne en LF dans le dépôt (cohérence Windows / CI Linux).
+* text=auto eol=lf
+
+# Fichiers binaires : pas de normalisation.
+*.png binary
+*.ico binary
+*.webp binary
+*.jpg binary
+*.jpeg binary

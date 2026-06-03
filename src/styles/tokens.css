@@ -1,0 +1,241 @@
+/* ============================================================
+   Maison Lior — Design Tokens
+   Colors, Type, Spacing, Radius, Shadow, Motion
+   ============================================================ */
+
+/* Inter is loaded via next/font in src/app/layout.tsx — do not @import here. */
+
+:root {
+  /* ----- Color: Surfaces ----- */
+  --bg:               #FFFFFF;
+  --bg-secondary:     #F5F5F7;
+  --bg-elevated:      #FFFFFF;
+
+  /* ----- Color: Foreground ----- */
+  --fg:               #1D1D1F;     /* Apple noir, never #000 */
+  --fg-secondary:     #6E6E73;
+  --fg-tertiary:      #86868B;
+  --fg-on-dark:       #F5F5F7;
+
+  /* ----- Color: Lines ----- */
+  --border:           #D2D2D7;
+  --border-strong:    #86868B;
+
+  /* ----- Color: Accents (use sparingly) ----- */
+  --accent-warm:      #C9A96E;     /* champagne — badges, rules */
+  --accent-warm-soft: #D4A5A5;     /* rose poudré — alt, à valider */
+  --accent-cta:       #1D1D1F;     /* primary buttons = noir */
+
+  /* ----- Color: Semantic ----- */
+  --success:          #0E7B3A;
+  --warning:          #B85900;
+  --danger:           #B5261E;
+
+  /* ----- Type: Family ----- */
+  --font-display:     'Inter', 'Inter Display', -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+  --font-body:        'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  --font-mono:        ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* ----- Type: Scale (px) ----- */
+  --text-hero:        80px;        /* desktop hero */
+  --text-display:     56px;
+  --text-h1:          48px;
+  --text-h2:          40px;
+  --text-h3:          32px;
+  --text-h4:          24px;
+  --text-h5:          20px;
+  --text-body:        17px;
+  --text-body-sm:     15px;
+  --text-caption:     14px;
+  --text-eyebrow:     12px;
+
+  /* ----- Type: Tracking ----- */
+  --track-tight:      -0.022em;
+  --track-snug:       -0.015em;
+  --track-normal:     0;
+  --track-wide:       0.04em;
+  --track-eyebrow:    0.08em;
+
+  /* ----- Type: Leading ----- */
+  --leading-tight:    1.07;
+  --leading-snug:     1.2;
+  --leading-body:     1.47;
+  --leading-caption:  1.4;
+
+  /* ----- Type: Weight ----- */
+  --weight-regular:   400;
+  --weight-medium:    500;
+  --weight-semibold:  600;
+  --weight-bold:      700;
+
+  /* ----- Spacing scale ----- */
+  --s-1:   4px;
+  --s-2:   8px;
+  --s-3:   12px;
+  --s-4:   16px;
+  --s-6:   24px;
+  --s-8:   32px;
+  --s-12:  48px;
+  --s-16:  64px;
+  --s-24:  96px;
+  --s-32:  128px;
+
+  /* ----- Layout ----- */
+  --container-max:    1280px;
+  --gutter-mobile:    24px;
+  --gutter-desktop:   80px;
+  --section-y:        clamp(96px, 10vw, 128px);
+
+  /* ----- Radii ----- */
+  --r-button:         9999px;     /* full pill — Apple signature */
+  --r-input:          12px;
+  --r-card:           18px;
+  --r-card-large:     28px;
+  --r-image:          12px;
+
+  /* ----- Shadow ----- */
+  --shadow-1:         0 4px 24px rgba(0, 0, 0, 0.04);
+  --shadow-2:         0 12px 40px rgba(0, 0, 0, 0.08);
+
+  /* ----- Motion ----- */
+  --ease:             cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-fast:         200ms;
+  --dur:              300ms;
+  --dur-slow:         500ms;
+
+  /* ----- Glass ----- */
+  --glass-bg:         rgba(255, 255, 255, 0.72);
+  --glass-bg-strong:  rgba(255, 255, 255, 0.85);
+  --glass-blur:       blur(20px) saturate(180%);
+  --glass-blur-strong: blur(30px) saturate(180%);
+}
+
+/* ============================================================
+   Base reset + typography
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+img, svg, video { display: block; max-width: 100%; }
+
+/* ============================================================
+   Semantic typography
+   ============================================================ */
+.t-hero,
+h1.t-hero {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 6.5vw, var(--text-hero));
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--track-tight);
+  line-height: var(--leading-tight);
+  margin: 0;
+}
+
+.t-display {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 4.5vw, var(--text-display));
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--track-tight);
+  line-height: var(--leading-tight);
+  margin: 0;
+}
+
+h1, .t-h1 {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 4vw, var(--text-h1));
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--track-snug);
+  line-height: var(--leading-tight);
+  margin: 0;
+}
+
+h2, .t-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3vw, var(--text-h2));
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--track-snug);
+  line-height: var(--leading-snug);
+  margin: 0;
+}
+
+h3, .t-h3 {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--track-snug);
+  line-height: var(--leading-snug);
+  margin: 0;
+}
+
+h4, .t-h4 {
+  font-size: var(--text-h4);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--track-snug);
+  line-height: var(--leading-snug);
+  margin: 0;
+}
+
+p, .t-body {
+  font-size: var(--text-body);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-body);
+  margin: 0;
+}
+
+.t-caption {
+  font-size: var(--text-caption);
+  color: var(--fg-secondary);
+  line-height: var(--leading-caption);
+  margin: 0;
+}
+
+.t-eyebrow {
+  font-size: var(--text-eyebrow);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--fg-secondary);
+  margin: 0;
+}
+
+.t-wordmark {
+  font-family: var(--font-display);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   Utilities
+   ============================================================ */
+.container {
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter-mobile);
+}
+@media (min-width: 768px) {
+  .container { padding-inline: var(--gutter-desktop); }
+}
+
+.section { padding-block: var(--section-y); }
+.section--alt { background: var(--bg-secondary); }
+
+.hairline { height: 1px; background: var(--border); border: 0; margin: 0; }
+
+a { color: inherit; text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+::selection { background: var(--fg); color: var(--bg); }
