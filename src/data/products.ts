@@ -22,6 +22,7 @@ const C = {
   bordeaux: { name: "Bordeaux", hex: "#7A1E27" },
   or: { name: "Or", hex: "#D8B26A" },
   nude: { name: "Nude", hex: "#D9C2A6" },
+  sauge: { name: "Vert sauge", hex: "#9CAF88" },
 } satisfies Record<string, ColorOption>;
 
 // Stock pseudo-réaliste mais déterministe (pas d'aléa : build reproductible).
@@ -260,15 +261,15 @@ export const PRODUCTS: Product[] = [
     categorySlug: "accessoires", collection: "Édition", priceNum: 320,
     tone: "#C9A96E", bg: "#F4ECDB", kind: "scarf", material: "Soie",
     composition: "100% soie, sergé. 90 × 90 cm, roulotté main.",
-    images: photos("accessoires", "carre-aria", 3),
+    images: photos("accessoires", "carre-aria", 2),
     colors: [C.champagne, C.ivoire, C.bleuNuit], sizes: [],
   }),
   product({
-    id: "p12", slug: "bracelet-iris", name: "Bracelet Iris", sub: "Or jaune 18 ct",
-    categorySlug: "accessoires", collection: "Édition", priceNum: 780,
-    tone: "#D8B26A", bg: "#F4ECDB", kind: "jewel", material: "Or 18 ct",
-    composition: "Or jaune 18 carats, poids 6 g.",
-    images: photos("accessoires", "bracelet-iris", 3),
-    colors: [C.or], sizes: [],
+    id: "p12", slug: "carre-sauge", name: "Carré Sauge", sub: "Soie, vert sauge",
+    categorySlug: "accessoires", collection: "Édition", priceNum: 290,
+    tone: "#9CAF88", bg: "#EEF1E9", kind: "scarf", material: "Soie",
+    composition: "100% soie, sergé. 90 × 90 cm, roulotté main.",
+    images: photos("accessoires", "carre-sauge", 2),
+    colors: [C.sauge], sizes: [],
   }),
 ];

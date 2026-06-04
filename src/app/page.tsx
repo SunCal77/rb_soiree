@@ -4,16 +4,19 @@ import { PromoBar } from "@/components/PromoBar";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ProductCard } from "@/components/ProductCard";
-import { EditorialPhoto, UniversArt } from "@/components/Silhouette";
 import { asset } from "@/lib/asset";
-import { getAllProducts, getFeaturedCategories, countByCategory } from "@/lib/catalog";
+import {
+  getAllProducts,
+  getFeaturedCategories,
+  getProductsByCategory,
+  countByCategory,
+} from "@/lib/catalog";
 
-// Map d'une catégorie vers l'illustration « univers » (placeholder).
-const UNIVERS_ART: Record<string, "robes" | "sacs" | "access"> = {
-  robes: "robes",
-  sacs: "sacs",
-  accessoires: "access",
-};
+// Couverture d'une catégorie = 1ʳᵉ photo du 1ᵉʳ produit qui en possède une.
+function categoryCover(slug: string): string | null {
+  const withPhoto = getProductsByCategory(slug).find((p) => p.images[0]);
+  return withPhoto?.images[0] ?? null;
+}
 
 export default function HomePage() {
   const products = getAllProducts();
@@ -66,23 +69,34 @@ export default function HomePage() {
             </h2>
           </header>
           <div className="ml-univers">
-            {featured.map((c) => (
-              <Link
-                key={c.slug}
-                className="ml-univers__tile"
-                href={`/boutique?cat=${c.slug}`}
-              >
-                <div className="ml-univers__art">
-                  <UniversArt kind={UNIVERS_ART[c.slug] ?? "access"} />
-                </div>
-                <div className="ml-univers__label">
-                  <span className="ml-univers__name">{c.label}</span>
-                  <span className="ml-univers__sub">
-                    {countByCategory(c.slug)} pièces
-                  </span>
-                </div>
-              </Link>
-            ))}
+            {featured.map((c) => {
+              const cover = categoryCover(c.slug);
+              return (
+                <Link
+                  key={c.slug}
+                  className="ml-univers__tile"
+                  href={`/boutique?cat=${c.slug}`}
+                >
+                  <div className="ml-univers__art">
+                    {cover && (
+                      <Image
+                        src={asset(cover)}
+                        alt={c.label}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        style={{ objectFit: "cover" }}
+                      />
+                    )}
+                  </div>
+                  <div className="ml-univers__label">
+                    <span className="ml-univers__name">{c.label}</span>
+                    <span className="ml-univers__sub">
+                      {countByCategory(c.slug)} pièces
+                    </span>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -110,8 +124,14 @@ export default function HomePage() {
 
       <section className="ml-section">
         <div className="ml-container ml-edito">
-          <div className="ml-edito__art" aria-hidden="true">
-            <EditorialPhoto />
+          <div className="ml-edito__art">
+            <Image
+              src={asset("/images/home/editorial.png")}
+              alt="Robe de soirée — Ma Robe Soirée"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              style={{ objectFit: "cover" }}
+            />
           </div>
           <div className="ml-edito__body">
             <p className="t-eyebrow">L&apos;atelier</p>

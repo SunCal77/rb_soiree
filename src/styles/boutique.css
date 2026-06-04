@@ -171,9 +171,17 @@ a.ml-link-blue:hover { text-decoration: underline; }
 .ml-univers__art svg { width: 100%; height: 100%; display: block; }
 .ml-univers__label {
   position: absolute; left: 0; right: 0; bottom: 0;
-  padding: 28px;
+  padding: 56px 28px 28px;
   display: flex; flex-direction: column; gap: 4px;
   z-index: 2;
+  /* Dégradé clair pour garder le texte near-black lisible sur n'importe
+     quelle photo (y compris une robe noire). */
+  background: linear-gradient(
+    to top,
+    rgba(245, 245, 247, 0.96) 0%,
+    rgba(245, 245, 247, 0.78) 45%,
+    rgba(245, 245, 247, 0) 100%
+  );
 }
 .ml-univers__name {
   font-family: var(--font-display);
@@ -244,7 +252,7 @@ a.ml-link-blue:hover { text-decoration: underline; }
   display: grid; gap: 64px; align-items: center;
   grid-template-columns: 1fr 1fr;
 }
-.ml-edito__art { border-radius: 28px; overflow: hidden; aspect-ratio: 5/4; background: #EAE2D5; }
+.ml-edito__art { position: relative; border-radius: 28px; overflow: hidden; aspect-ratio: 5/4; background: #EAE2D5; }
 .ml-edito__art svg, .ml-edito__art img { width: 100%; height: 100%; display: block; object-fit: cover; }
 .ml-edito__body { display: flex; flex-direction: column; gap: 18px; max-width: 480px; }
 .ml-edito__copy { font-size: 17px; line-height: 1.6; color: var(--fg); }

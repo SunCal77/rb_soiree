@@ -1,5 +1,12 @@
 # Prompts IA — images produits (sacs, chaussures, cravates, accessoires)
 
+> ✅ **STATUT : toutes les images sont intégrées** (sacs, chaussures, cravates,
+> accessoires + héros + éditoriale home). Document conservé pour régénérer une
+> image au besoin.
+> ⚠️ Changement : le **Bracelet Iris** a été remplacé par un **Carré Sauge**
+> (carré de soie vert) — fichiers `accessoires/carre-sauge-1..2.png`.
+> Le **Carré Aria** a **2** photos (et non 3).
+
 > **But** : générer les vraies photos des produits non-robes et les déposer dans
 > `public/images/products/<categorie>/` avec **le nom exact** indiqué.
 > Le code est **déjà câblé** : dès qu'un fichier au bon nom existe, il s'affiche
