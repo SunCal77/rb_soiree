@@ -9,6 +9,7 @@ import Image from "next/image";
 import { Silhouette } from "@/components/Silhouette";
 import { asset } from "@/lib/asset";
 import { formatEUR } from "@/lib/format";
+import { siteConfig } from "@/data/site";
 import type { ProductKind } from "@/data/types";
 
 type SavedLine = {
@@ -132,19 +133,23 @@ export default function ConfirmationPage() {
             <div className="ml-confirm__pickup__block">
               <span className="ml-confirm__pickup__label">Adresse</span>
               <span className="ml-confirm__pickup__value">
-                Maison Lior
+                {siteConfig.name}
                 <br />
-                12 rue d&apos;Aboukir
+                {siteConfig.address.street}
                 <br />
-                75002 Paris
+                {siteConfig.address.zip} {siteConfig.address.city}
+                <br />
+                <span className="muted" style={{ fontSize: 13 }}>
+                  {siteConfig.address.note}
+                </span>
               </span>
             </div>
             <div className="ml-confirm__pickup__block">
               <span className="ml-confirm__pickup__label">Horaires</span>
               <span className="ml-confirm__pickup__value">
-                Mardi → samedi · 11h00 → 19h00
+                {siteConfig.hours.daysLabel} · {siteConfig.hours.range}
                 <br />
-                Fermé dimanche et lundi
+                {siteConfig.hours.closed}
               </span>
             </div>
             <div className="ml-confirm__pickup__block">

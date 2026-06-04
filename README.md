@@ -1,9 +1,11 @@
-# Maison Lior — vitrine e-commerce
+# Ma Robe Soirée — vitrine e-commerce
 
-Vitrine en ligne de **Maison Lior**, boutique parisienne de prêt-à-porter et
-accessoires pour femmes (12 rue d'Aboukir, 75002 Paris). La boutique sert de
-**point de retrait** : en V1, la livraison se fait **uniquement en
-click-and-collect**.
+Vitrine en ligne de **Ma Robe Soirée**, boutique de robes de soirée et
+accessoires pour femmes (50 rue des Lys, 91150 Étampes — entrée pharmacie, dans
+le magasin Leclerc). La boutique sert de **point de retrait** : en V1, la
+livraison se fait **uniquement en click-and-collect**.
+
+> Coordonnées centralisées dans [`src/data/site.ts`](src/data/site.ts).
 
 Catalogue : **robes, sacs, chaussures, cravates, accessoires**.
 

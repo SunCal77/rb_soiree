@@ -5,6 +5,7 @@ import type { Product } from "@/data/types";
 import { useCart } from "@/lib/cart-context";
 import { getCategory, isSizeAvailable, stockFor } from "@/lib/catalog";
 import { formatEUR } from "@/lib/format";
+import { siteConfig, addressLine } from "@/data/site";
 import { Silhouette } from "./Silhouette";
 import { ProductImage } from "./ProductImage";
 
@@ -242,10 +243,11 @@ export function PDPInteractive({ product }: { product: Product }) {
           </span>
           <div>
             <div style={{ fontWeight: 500, color: "#1D1D1F" }}>
-              Disponible — 12 rue d&apos;Aboukir, Paris 2ᵉ
+              Disponible — {addressLine}
             </div>
             <div className="muted" style={{ fontSize: 13 }}>
-              Réservez en ligne, retrait sous 2 heures du mardi au samedi.
+              {siteConfig.address.note} · Retrait{" "}
+              {siteConfig.hours.daysLabel.toLowerCase()}.
             </div>
           </div>
         </div>

@@ -4,9 +4,11 @@
 
 ## Ce qu'est le projet
 
-Vitrine e-commerce pour une **boutique physique** de vêtements et accessoires
-pour femmes (Maison Lior, 12 rue d'Aboukir, Paris 2ᵉ). La boutique sert de
-**point de retrait** : la livraison est en **click-and-collect uniquement** (V1).
+Vitrine e-commerce pour une **boutique physique** de robes de soirée et
+accessoires pour femmes (**Ma Robe Soirée**, 50 rue des Lys, 91150 Étampes —
+entrée pharmacie, dans le magasin Leclerc). La boutique sert de **point de
+retrait** : la livraison est en **click-and-collect uniquement** (V1).
+Coordonnées centralisées dans `src/data/site.ts`.
 
 Catégories (taxonomie data-driven, les 5 existent) : **robes, sacs, chaussures,
 cravates, accessoires**. Robes/sacs/accessoires sont remplis ; chaussures et

@@ -1,9 +1,11 @@
 import Link from "next/link";
+import Image from "next/image";
 import { PromoBar } from "@/components/PromoBar";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ProductCard } from "@/components/ProductCard";
-import { HeroPhoto, EditorialPhoto, UniversArt } from "@/components/Silhouette";
+import { EditorialPhoto, UniversArt } from "@/components/Silhouette";
+import { asset } from "@/lib/asset";
 import { getAllProducts, getFeaturedCategories, countByCategory } from "@/lib/catalog";
 
 // Map d'une catégorie vers l'illustration « univers » (placeholder).
@@ -24,7 +26,17 @@ export default function HomePage() {
 
       <section className="ml-hero">
         <div className="ml-hero__bg" aria-hidden="true">
-          <HeroPhoto />
+          <Image
+            src={asset("/images/hero/hero.png")}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            style={{ objectFit: "cover", objectPosition: "right center" }}
+          />
+          {/* Voile clair léger pour garantir la lisibilité du texte near-black
+              centré, même si le sujet sombre (à droite) remonte vers le centre. */}
+          <div className="ml-hero__scrim" />
         </div>
         <div className="ml-hero__content">
           <p className="ml-hero__eyebrow">Collection hiver 2026</p>

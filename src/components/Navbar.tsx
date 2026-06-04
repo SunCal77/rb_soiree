@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
 import { getCategories } from "@/lib/catalog";
+import { siteConfig } from "@/data/site";
 
 // Menu data-driven : « Boutique » + chaque catégorie de la taxonomie. Ajouter
 // une catégorie dans src/data/categories.ts l'affiche ici automatiquement.
@@ -21,7 +22,7 @@ export function Navbar({ active }: { active?: string }) {
     <header className="ml-nav">
       <div className="ml-nav__inner">
         <Link className="ml-nav__brand" href="/">
-          Maison Lior
+          {siteConfig.name}
         </Link>
         <nav className="ml-nav__menu">
           {ITEMS.map((i) => (

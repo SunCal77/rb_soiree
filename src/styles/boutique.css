@@ -1,5 +1,5 @@
 /* ============================================================
-   Maison Lior — Boutique screens (extends tokens.css)
+   Ma Robe Soirée — Boutique screens (extends tokens.css)
    ============================================================ */
 
 /* ---- Buttons ---- */
@@ -125,6 +125,15 @@ a.ml-link-blue:hover { text-decoration: underline; }
 }
 .ml-hero__bg { position: absolute; inset: 0; }
 .ml-hero__bg img, .ml-hero__bg svg { width: 100%; height: 100%; object-fit: cover; }
+/* Voile clair (au-dessus de l'image, sous le texte) : protège la lisibilité du
+   titre near-black centré. Plus marqué en haut/à gauche, transparent à droite
+   pour laisser respirer le sujet. */
+.ml-hero__scrim {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(245,245,247,0.72) 0%, rgba(245,245,247,0.30) 38%, rgba(245,245,247,0) 66%),
+    linear-gradient(90deg, rgba(245,245,247,0.45) 0%, rgba(245,245,247,0) 58%);
+}
 .ml-hero__content {
   position: absolute; inset: 0;
   display: flex; flex-direction: column; align-items: center;

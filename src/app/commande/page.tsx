@@ -9,6 +9,7 @@ import { Footer } from "@/components/Footer";
 import { ProductImage } from "@/components/ProductImage";
 import { useCart } from "@/lib/cart-context";
 import { formatEUR } from "@/lib/format";
+import { siteConfig, addressLine, hoursLine } from "@/data/site";
 
 export default function CheckoutPage() {
   const router = useRouter();
@@ -148,9 +149,11 @@ export default function CheckoutPage() {
                         <span className="muted" style={{ fontWeight: 400 }}>· Offert</span>
                       </div>
                       <div className="ml-radio-card__sub">
-                        Maison Lior — 12 rue d&apos;Aboukir, 75002 Paris
+                        {siteConfig.name} — {addressLine}
                         <br />
-                        Du mardi au samedi, 11h à 19h. Disponible sous 2 heures.
+                        {siteConfig.address.note}
+                        <br />
+                        {hoursLine}.
                       </div>
                     </div>
                   </div>
@@ -182,7 +185,7 @@ export default function CheckoutPage() {
               )}
               {step > 2 && (
                 <div className="ml-step__summary">
-                  Retrait en boutique — 12 rue d&apos;Aboukir, 75002 Paris (offert)
+                  Retrait en boutique — {addressLine} (offert)
                 </div>
               )}
             </section>

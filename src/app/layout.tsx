@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { CartProvider } from "@/lib/cart-context";
 import { CartDrawer } from "@/components/CartDrawer";
+import { siteConfig, addressLine } from "@/data/site";
 import "./globals.css";
 
 const inter = Inter({
@@ -11,9 +12,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Maison Lior — Robes de soirée, sacs, accessoires",
-  description:
-    "Maison Lior — pièces d'exception confectionnées à Paris, en quantités limitées. Retrait en boutique, 12 rue d'Aboukir, Paris 2ᵉ.",
+  title: `${siteConfig.name} — ${siteConfig.tagline}`,
+  description: `${siteConfig.name} — ${siteConfig.tagline}. Retrait en boutique (click-and-collect), ${addressLine}.`,
 };
 
 export default function RootLayout({

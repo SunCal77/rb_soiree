@@ -1,6 +1,7 @@
 "use client";
 
 import { getCategories } from "@/lib/catalog";
+import { siteConfig, addressLine, hoursLine, phoneHref, emailHref } from "@/data/site";
 
 export function Footer() {
   return (
@@ -28,12 +29,14 @@ export function Footer() {
           </ul>
         </div>
         <div>
-          <p className="t-eyebrow">Maison Lior</p>
+          <p className="t-eyebrow">Boutique &amp; retrait</p>
           <ul>
-            <li><a href="#">L&apos;atelier</a></li>
-            <li><a href="#">Le magasin</a></li>
-            <li><a href="#">Carrières</a></li>
-            <li><a href="#">Presse</a></li>
+            <li>{addressLine}</li>
+            <li>{siteConfig.address.note}</li>
+            <li>{hoursLine}</li>
+            <li>{siteConfig.hours.closed}</li>
+            <li><a href={phoneHref}>{siteConfig.phone}</a></li>
+            <li><a href={emailHref}>{siteConfig.email}</a></li>
           </ul>
         </div>
         <div>
@@ -50,7 +53,7 @@ export function Footer() {
         </div>
       </div>
       <div className="ml-container ml-footer__legal">
-        <span>© 2026 Maison Lior — 12 rue d&apos;Aboukir, 75002 Paris</span>
+        <span>© 2026 {siteConfig.name} — {addressLine}</span>
         <span>
           <a href="#">Mentions légales</a> · <a href="#">CGV</a> ·{" "}
           <a href="#">Confidentialité</a> · <a href="#">Cookies</a>
