@@ -30,14 +30,21 @@ export function Footer() {
         </div>
         <div>
           <p className="t-eyebrow">Boutique &amp; retrait</p>
-          <ul>
-            <li>{addressLine}</li>
-            <li>{siteConfig.address.note}</li>
-            <li>{hoursLine}</li>
-            <li>{siteConfig.hours.closed}</li>
-            <li><a href={phoneHref}>{siteConfig.phone}</a></li>
-            <li><a href={emailHref}>{siteConfig.email}</a></li>
-          </ul>
+          <address className="ml-footer__contact">
+            <p className="ml-footer__addr">{addressLine}</p>
+            <p>{siteConfig.address.note}</p>
+            <p className="ml-footer__contact-row">
+              {hoursLine}
+              <br />
+              {siteConfig.hours.closed}
+            </p>
+            <p>
+              <a href={phoneHref}>{siteConfig.phone}</a>
+            </p>
+            <p>
+              <a href={emailHref}>{siteConfig.email}</a>
+            </p>
+          </address>
         </div>
         <div>
           <p className="t-eyebrow">Lettre</p>
