@@ -5,6 +5,7 @@ import { useState } from "react";
 import type { Product } from "@/data/types";
 import { formatEUR } from "@/lib/format";
 import { ProductImage } from "./ProductImage";
+import { Carousel } from "./Carousel";
 
 export function ProductCard({
   product,
@@ -29,7 +30,18 @@ export function ProductCard({
           </span>
         )}
         <div className="ml-pcard__inner">
-          <ProductImage product={product} />
+          {product.images.length > 0 ? (
+            <Carousel
+              images={product.images}
+              alt={product.name}
+              mode="hover"
+              fit="contain"
+              bg={product.bg}
+              sizes="(max-width: 768px) 50vw, 25vw"
+            />
+          ) : (
+            <ProductImage product={product} />
+          )}
         </div>
         {showQuick && (
           <span className="ml-pcard__quick">Vue rapide</span>

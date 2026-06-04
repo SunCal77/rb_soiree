@@ -4,6 +4,7 @@ import { PromoBar } from "@/components/PromoBar";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ProductCard } from "@/components/ProductCard";
+import { Carousel } from "@/components/Carousel";
 import { asset } from "@/lib/asset";
 import {
   getAllProducts,
@@ -12,10 +13,27 @@ import {
   countByCategory,
 } from "@/lib/catalog";
 
-// Couverture d'une catégorie = 1ʳᵉ photo du 1ᵉʳ produit qui en possède une.
-function categoryCover(slug: string): string | null {
-  const withPhoto = getProductsByCategory(slug).find((p) => p.images[0]);
-  return withPhoto?.images[0] ?? null;
+// La robe de référence (la plus belle) — ouvre la box « Robes ».
+const REFERENCE_DRESS = "/images/home/editorial.png";
+
+// Images défilantes d'une grande box « univers ».
+function universImages(slug: string): string[] {
+  const prods = getProductsByCategory(slug);
+  if (slug === "robes") {
+    return [
+      REFERENCE_DRESS,
+      ...prods.map((p) => p.images[0]).filter(Boolean),
+    ].slice(0, 6);
+  }
+  // Sacs / accessoires : on fait défiler plusieurs vues.
+  return prods.flatMap((p) => p.images).slice(0, 6);
+}
+
+// Images d'accessoires pour le bloc éditorial du bas.
+function accessoryImages(): string[] {
+  return getProductsByCategory("accessoires")
+    .flatMap((p) => p.images)
+    .slice(0, 6);
 }
 
 export default function HomePage() {
@@ -37,9 +55,6 @@ export default function HomePage() {
             sizes="100vw"
             style={{ objectFit: "cover", objectPosition: "right center" }}
           />
-          {/* Voile clair léger pour garantir la lisibilité du texte near-black
-              centré, même si le sujet sombre (à droite) remonte vers le centre. */}
-          <div className="ml-hero__scrim" />
         </div>
         <div className="ml-hero__content">
           <p className="ml-hero__eyebrow">Collection hiver 2026</p>
@@ -69,34 +84,31 @@ export default function HomePage() {
             </h2>
           </header>
           <div className="ml-univers">
-            {featured.map((c) => {
-              const cover = categoryCover(c.slug);
-              return (
-                <Link
-                  key={c.slug}
-                  className="ml-univers__tile"
-                  href={`/boutique?cat=${c.slug}`}
-                >
-                  <div className="ml-univers__art">
-                    {cover && (
-                      <Image
-                        src={asset(cover)}
-                        alt={c.label}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 33vw"
-                        style={{ objectFit: "cover" }}
-                      />
-                    )}
-                  </div>
-                  <div className="ml-univers__label">
-                    <span className="ml-univers__name">{c.label}</span>
-                    <span className="ml-univers__sub">
-                      {countByCategory(c.slug)} pièces
-                    </span>
-                  </div>
-                </Link>
-              );
-            })}
+            {featured.map((c, i) => (
+              <Link
+                key={c.slug}
+                className="ml-univers__tile"
+                href={`/boutique?cat=${c.slug}`}
+              >
+                <div className="ml-univers__art">
+                  <Carousel
+                    images={universImages(c.slug)}
+                    alt={c.label}
+                    mode="auto"
+                    fit="cover"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    interval={3000 + i * 700}
+                    priority={i === 0}
+                  />
+                </div>
+                <div className="ml-univers__label">
+                  <span className="ml-univers__name">{c.label}</span>
+                  <span className="ml-univers__sub">
+                    {countByCategory(c.slug)} pièces
+                  </span>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
@@ -125,12 +137,14 @@ export default function HomePage() {
       <section className="ml-section">
         <div className="ml-container ml-edito">
           <div className="ml-edito__art">
-            <Image
-              src={asset("/images/home/editorial.png")}
-              alt="Robe de soirée — Ma Robe Soirée"
-              fill
+            <Carousel
+              images={accessoryImages()}
+              alt="Accessoires — Ma Robe Soirée"
+              mode="auto"
+              fit="cover"
               sizes="(max-width: 768px) 100vw, 50vw"
-              style={{ objectFit: "cover" }}
+              interval={3600}
+              showDots
             />
           </div>
           <div className="ml-edito__body">
