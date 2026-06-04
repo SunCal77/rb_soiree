@@ -1,13 +1,18 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 import type { Product } from "@/data/types";
 import { asset } from "@/lib/asset";
 import { Silhouette } from "./Silhouette";
 
-// Rendu d'une photo produit. On passe par `next/image`, qui applique
-// automatiquement le base path (GitHub Pages) — donc aucun chemin absolu en dur.
-// Si le produit n'a pas (encore) de photo, on retombe sur la silhouette SVG :
-// sacs, accessoires, chaussures et cravates continuent de s'afficher sans image
-// cassée.
+// Rendu d'une photo produit. On passe par `next/image`, et le base path
+// (GitHub Pages) est appliqué via asset() — aucun chemin absolu en dur.
+//
+// Tolérant : si le produit n'a pas (encore) de photo, OU si le fichier est
+// absent (404), on retombe sur la silhouette SVG. Conséquence pratique : on
+// peut déclarer `images:` AVANT que les fichiers existent — chaque visuel
+// s'affiche dès qu'il est déposé, sans image cassée entre-temps.
 export function ProductImage({
   product,
   index = 0,
@@ -20,7 +25,9 @@ export function ProductImage({
   priority?: boolean;
 }) {
   const src = product.images[index];
-  if (!src) {
+  const [failedSrc, setFailedSrc] = useState<string | null>(null);
+
+  if (!src || failedSrc === src) {
     return (
       <Silhouette kind={product.kind} tone={product.tone} bg={product.bg} full />
     );
@@ -42,6 +49,7 @@ export function ProductImage({
         sizes={sizes}
         priority={priority}
         style={{ objectFit: "contain" }}
+        onError={() => setFailedSrc(src)}
       />
     </span>
   );

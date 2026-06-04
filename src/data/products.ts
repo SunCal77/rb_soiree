@@ -206,6 +206,7 @@ export const PRODUCTS: Product[] = [
     categorySlug: "sacs", collection: "Édition", priceNum: 980,
     tone: "#A78866", bg: "#F2EAE0", kind: "bag", material: "Cuir grainé",
     composition: "Cuir de veau pleine fleur grainé, doublure cupro.",
+    images: photos("sacs", "sac-aurore", 3),
     colors: [C.fauve, C.noir], sizes: [],
   }),
   product({
@@ -213,6 +214,7 @@ export const PRODUCTS: Product[] = [
     categorySlug: "sacs", collection: "Édition", priceNum: 1120, badge: "Stock limité",
     tone: "#1D1D1F", bg: "#F5F5F7", kind: "bag", material: "Cuir lisse",
     composition: "Cuir de veau lisse, doublure cupro.",
+    images: photos("sacs", "sac-emilie", 3),
     colors: [C.noir], sizes: [], stock: [2],
   }),
 
@@ -222,6 +224,7 @@ export const PRODUCTS: Product[] = [
     categorySlug: "chaussures", collection: "Édition", priceNum: 690, badge: "Nouveau",
     tone: "#1D1D1F", bg: "#F0EFEF", kind: "shoe", material: "Cuir verni",
     composition: "Cuir verni, semelle cuir. Talon 85 mm. Fabrication italienne.",
+    images: photos("chaussures", "escarpin-vesane", 3),
     colors: [C.noir, C.bordeaux], sizes: ["36", "37", "38", "39", "40", "41"],
   }),
   product({
@@ -229,6 +232,7 @@ export const PRODUCTS: Product[] = [
     categorySlug: "chaussures", collection: "Capsule Soirée", priceNum: 620,
     tone: "#D9C2A6", bg: "#F4EFE7", kind: "shoe", material: "Daim",
     composition: "Daim de chèvre, semelle cuir. Talon 70 mm.",
+    images: photos("chaussures", "sandale-laetitia", 3),
     colors: [C.nude, C.champagne], sizes: ["36", "37", "38", "39", "40"],
   }),
 
@@ -238,6 +242,7 @@ export const PRODUCTS: Product[] = [
     categorySlug: "cravates", collection: "Édition", priceNum: 140,
     tone: "#1B2540", bg: "#E8E9EE", kind: "tie", material: "Soie tissée",
     composition: "100% soie tissée. Largeur 7,5 cm.",
+    images: photos("cravates", "cravate-augustin", 2),
     colors: [C.bleuNuit, C.bordeaux, C.noir], sizes: [],
   }),
   product({
@@ -245,6 +250,7 @@ export const PRODUCTS: Product[] = [
     categorySlug: "cravates", collection: "Édition", priceNum: 95,
     tone: "#1D1D1F", bg: "#F0EFEF", kind: "tie", material: "Soie jacquard",
     composition: "100% soie jacquard. Réglable, à nouer.",
+    images: photos("cravates", "noeud-papillon-leon", 2),
     colors: [C.noir, C.ivoire], sizes: [],
   }),
 
@@ -254,6 +260,7 @@ export const PRODUCTS: Product[] = [
     categorySlug: "accessoires", collection: "Édition", priceNum: 320,
     tone: "#C9A96E", bg: "#F4ECDB", kind: "scarf", material: "Soie",
     composition: "100% soie, sergé. 90 × 90 cm, roulotté main.",
+    images: photos("accessoires", "carre-aria", 3),
     colors: [C.champagne, C.ivoire, C.bleuNuit], sizes: [],
   }),
   product({
@@ -261,6 +268,7 @@ export const PRODUCTS: Product[] = [
     categorySlug: "accessoires", collection: "Édition", priceNum: 780,
     tone: "#D8B26A", bg: "#F4ECDB", kind: "jewel", material: "Or 18 ct",
     composition: "Or jaune 18 carats, poids 6 g.",
+    images: photos("accessoires", "bracelet-iris", 3),
     colors: [C.or], sizes: [],
   }),
 ];
