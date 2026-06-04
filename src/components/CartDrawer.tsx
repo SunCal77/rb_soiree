@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { useCart } from "@/lib/cart-context";
 import { formatEUR } from "@/lib/format";
-import { Silhouette } from "./Silhouette";
+import { ProductImage } from "./ProductImage";
 
 export function CartDrawer() {
   const { isOpen, closeCart, resolvedLines, count, subtotal, setQty, removeLine } =
@@ -86,12 +86,7 @@ export function CartDrawer() {
           {resolvedLines.map((l) => (
             <div className="ml-line" key={`${l.productId}-${l.size ?? "_"}`}>
               <div className="ml-line__img">
-                <Silhouette
-                  kind={l.product.kind}
-                  tone={l.product.tone}
-                  bg={l.product.bg}
-                  full
-                />
+                <ProductImage product={l.product} sizes="80px" />
               </div>
               <div>
                 <div className="ml-line__name">{l.product.name}</div>

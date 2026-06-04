@@ -375,6 +375,33 @@ a.ml-link-blue:hover { text-decoration: underline; }
 }
 .ml-pdp__main svg { width: 70%; height: 70%; }
 
+/* ---- PDP gallery controls ---- */
+.ml-gallery-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 40px; height: 40px; border-radius: 9999px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.78); color: #1D1D1F;
+  backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; box-shadow: var(--shadow-1);
+  transition: background 200ms var(--ease);
+  z-index: 2;
+}
+.ml-gallery-nav:hover { background: #fff; }
+.ml-gallery-nav--prev { left: 14px; }
+.ml-gallery-nav--next { right: 14px; }
+.ml-gallery-nav svg { width: 18px; height: 18px; }
+.ml-gallery-dots {
+  position: absolute; left: 0; right: 0; bottom: 14px;
+  display: flex; justify-content: center; gap: 7px; z-index: 2;
+}
+.ml-gallery-dot {
+  width: 7px; height: 7px; border-radius: 9999px;
+  background: rgba(29,29,31,0.25); cursor: pointer;
+  transition: background 200ms var(--ease), transform 200ms var(--ease);
+}
+.ml-gallery-dot.is-active { background: #1D1D1F; transform: scale(1.15); }
+
 .ml-pdp__info { padding-top: 16px; display: flex; flex-direction: column; gap: 18px; }
 .ml-pdp__crumbs { font-size: 13px; color: var(--fg-secondary); }
 .ml-pdp__title { font-size: 40px; font-weight: 600; letter-spacing: -0.022em; line-height: 1.07; color: #1D1D1F; }

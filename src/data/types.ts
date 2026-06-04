@@ -86,6 +86,13 @@ export type Product = {
   /** Couleur de fond de la silhouette placeholder. */
   bg: string;
   kind: ProductKind;
+  /**
+   * Photos réelles, ordonnées (la 1ʳᵉ = couverture / vignette). Chemins relatifs
+   * à `public/` (ex. "/images/products/robes/robe-lior-1.png"). Le base path
+   * GitHub Pages est appliqué au rendu via le composant image, jamais en dur.
+   * Tableau vide → l'UI retombe sur la silhouette SVG placeholder.
+   */
+  images: string[];
   // ── Attributs disponibles (dérivables des variantes, listés pour l'UI) ──
   colors: ColorOption[];
   materials: string[];

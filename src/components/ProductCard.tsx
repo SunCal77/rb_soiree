@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import type { Product } from "@/data/types";
 import { formatEUR } from "@/lib/format";
-import { Silhouette } from "./Silhouette";
+import { ProductImage } from "./ProductImage";
 
 export function ProductCard({
   product,
@@ -29,7 +29,7 @@ export function ProductCard({
           </span>
         )}
         <div className="ml-pcard__inner">
-          <Silhouette kind={product.kind} tone={product.tone} bg={product.bg} full />
+          <ProductImage product={product} />
         </div>
         {showQuick && (
           <span className="ml-pcard__quick">Vue rapide</span>

@@ -6,7 +6,7 @@ import { useState } from "react";
 import { PromoBar } from "@/components/PromoBar";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { Silhouette } from "@/components/Silhouette";
+import { ProductImage } from "@/components/ProductImage";
 import { useCart } from "@/lib/cart-context";
 import { formatEUR } from "@/lib/format";
 
@@ -39,6 +39,7 @@ export default function CheckoutPage() {
           kind: l.product.kind,
           tone: l.product.tone,
           bg: l.product.bg,
+          image: l.product.images[0] ?? null,
           color: l.color,
           size: l.size,
           qty: l.qty,
@@ -249,7 +250,7 @@ export default function CheckoutPage() {
               {resolvedLines.map((l) => (
                 <div key={`${l.productId}-${l.size ?? "_"}`} className="ml-summary__line">
                   <div className="ml-summary__line__img">
-                    <Silhouette kind={l.product.kind} tone={l.product.tone} bg={l.product.bg} full />
+                    <ProductImage product={l.product} sizes="60px" />
                   </div>
                   <div>
                     <div className="ml-summary__line__name">

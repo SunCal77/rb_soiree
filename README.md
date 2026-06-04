@@ -185,9 +185,11 @@ s'affiche — pas d'image cassée.
 ## Roadmap
 
 - **V1 (actuelle)** — vitrine statique, catalogue mock, click-and-collect,
-  déploiement Pages.
+  déploiement Pages. **Robes : vraies photos détourées intégrées** (galerie
+  swipe sur la fiche produit).
 - **Prochaines étapes**
-  - 📷 Remplacer les silhouettes par les **vraies photos** détourées.
+  - 📷 Photos pour sacs, accessoires, chaussures, cravates (silhouettes pour
+    l'instant) — il suffira de déposer les fichiers et de renseigner `images:`.
   - 🧮 Enrichir le catalogue (chaussures, cravates, accessoires).
   - 🛠️ **Interface admin** (gestion catalogue / stocks / commandes) — *hors V1*.
   - 🔌 Brancher un **backend réel** (mode `api` de `catalog.ts`) + paiement.

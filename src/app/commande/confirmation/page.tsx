@@ -5,26 +5,31 @@ import { useEffect, useState } from "react";
 import { PromoBar } from "@/components/PromoBar";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import Image from "next/image";
 import { Silhouette } from "@/components/Silhouette";
+import { asset } from "@/lib/asset";
 import { formatEUR } from "@/lib/format";
 import type { ProductKind } from "@/data/types";
+
+type SavedLine = {
+  productId: string;
+  name: string;
+  sub: string;
+  kind: ProductKind;
+  tone: string;
+  bg: string;
+  image?: string | null;
+  color: string | null;
+  size: string | null;
+  qty: number;
+  unitPrice: number;
+};
 
 type SavedOrder = {
   id: string;
   firstName: string;
   total: number;
-  lines: Array<{
-    productId: string;
-    name: string;
-    sub: string;
-    kind: ProductKind;
-    tone: string;
-    bg: string;
-    color: string | null;
-    size: string | null;
-    qty: number;
-    unitPrice: number;
-  }>;
+  lines: SavedLine[];
 };
 
 const FALLBACK: SavedOrder = {
@@ -32,11 +37,24 @@ const FALLBACK: SavedOrder = {
   firstName: "Camille",
   total: 4310,
   lines: [
-    { productId: "p1",  name: "Robe Lior",   sub: "Soie sablée, noir",   kind: "dress", tone: "#1D1D1F", bg: "#EFEAE0", color: "Noir",       size: "38", qty: 1, unitPrice: 1290 },
-    { productId: "p9",  name: "Sac Aurore",  sub: "Cuir grainé, fauve",  kind: "bag",   tone: "#A78866", bg: "#F2EAE0", color: "Fauve",      size: null, qty: 1, unitPrice:  980 },
-    { productId: "p11", name: "Carré Aria",  sub: "Soie, ton champagne", kind: "scarf", tone: "#C9A96E", bg: "#F4ECDB", color: "Champagne",  size: null, qty: 2, unitPrice:  320 },
+    { productId: "p1",  name: "Robe Lior",   sub: "Soie sablée, noir",   kind: "dress", tone: "#1D1D1F", bg: "#EFEAE0", image: "/images/products/robes/robe-lior-1.png", color: "Noir",       size: "38", qty: 1, unitPrice: 1290 },
+    { productId: "p9",  name: "Sac Aurore",  sub: "Cuir grainé, fauve",  kind: "bag",   tone: "#A78866", bg: "#F2EAE0", image: null, color: "Fauve",      size: null, qty: 1, unitPrice:  980 },
+    { productId: "p11", name: "Carré Aria",  sub: "Soie, ton champagne", kind: "scarf", tone: "#C9A96E", bg: "#F4ECDB", image: null, color: "Champagne",  size: null, qty: 2, unitPrice:  320 },
   ],
 };
+
+// Image de ligne de commande (snapshot) : photo réelle si présente, sinon
+// silhouette. `next/image` applique le base path automatiquement.
+function LineImage({ line }: { line: SavedLine }) {
+  if (!line.image) {
+    return <Silhouette kind={line.kind} tone={line.tone} bg={line.bg} full />;
+  }
+  return (
+    <span style={{ position: "relative", display: "block", width: "100%", height: "100%", background: line.bg }}>
+      <Image src={asset(line.image)} alt={line.name} fill sizes="64px" style={{ objectFit: "contain" }} />
+    </span>
+  );
+}
 
 export default function ConfirmationPage() {
   const [order, setOrder] = useState<SavedOrder>(FALLBACK);
@@ -156,7 +174,7 @@ export default function ConfirmationPage() {
             {order.lines.map((l, i) => (
               <div className="ml-confirm__item" key={`${l.productId}-${i}`}>
                 <div className="ml-confirm__item__img">
-                  <Silhouette kind={l.kind} tone={l.tone} bg={l.bg} full />
+                  <LineImage line={l} />
                 </div>
                 <div>
                   <div style={{ fontSize: 14, fontWeight: 500, color: "#1D1D1F" }}>

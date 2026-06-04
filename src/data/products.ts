@@ -61,6 +61,22 @@ const BASE = {
   care: "Nettoyage à sec uniquement. Conservez la pièce dans la housse fournie.",
 };
 
+/**
+ * Construit le tableau ordonné des chemins de photos d'un produit :
+ * `/images/products/<categorie>/<slug>-1..count.png`. La 1ʳᵉ est la couverture.
+ * (Chemins relatifs à public/ — le base path est appliqué au rendu.)
+ */
+function photos(
+  category: Product["categorySlug"],
+  slug: string,
+  count: number,
+): string[] {
+  return Array.from(
+    { length: count },
+    (_, i) => `/images/products/${category}/${slug}-${i + 1}.png`,
+  );
+}
+
 /** Petit constructeur pour garder la liste lisible. */
 function product(p: {
   id: string;
@@ -78,6 +94,7 @@ function product(p: {
   material: string | null;
   colors: ColorOption[];
   sizes: string[];
+  images?: string[];
   description?: string;
   care?: string;
   stock?: number[];
@@ -97,6 +114,7 @@ function product(p: {
     tone: p.tone,
     bg: p.bg,
     kind: p.kind,
+    images: p.images ?? [],
     colors: p.colors,
     materials: p.material ? [p.material] : [],
     sizes: p.sizes,
@@ -113,6 +131,7 @@ export const PRODUCTS: Product[] = [
     categorySlug: "robes", collection: "Édition", priceNum: 1290, badge: "Nouveau",
     tone: "#1D1D1F", bg: "#EFEAE0", kind: "dress", material: "Soie sablée",
     composition: "100% soie sablée. Doublure : 100% cupro. Tissu tissé à Côme, Italie.",
+    images: photos("robes", "robe-lior", 5),
     colors: [C.noir, C.bleuNuit, C.bordeaux], sizes: DRESS_SIZES,
   }),
   product({
@@ -120,6 +139,7 @@ export const PRODUCTS: Product[] = [
     categorySlug: "robes", collection: "Capsule Soirée", priceNum: 1450, badge: "Édition limitée",
     tone: "#E5DFD0", bg: "#FAF7F0", kind: "dress", material: "Crêpe",
     composition: "100% crêpe de soie. Doublure : 100% cupro.",
+    images: photos("robes", "robe-calliope", 3),
     colors: [C.ivoire, C.champagne], sizes: ["36", "38", "40"],
   }),
   product({
@@ -127,6 +147,7 @@ export const PRODUCTS: Product[] = [
     categorySlug: "robes", collection: "Édition", priceNum: 1690,
     tone: "#3A1E2C", bg: "#EDE3E1", kind: "dress", material: "Velours",
     composition: "Velours de soie 82%, élasthanne 18%. Doublure cupro.",
+    images: photos("robes", "robe-octavie", 4),
     colors: [C.prune, C.noir], sizes: ["34", "36", "38", "40", "42"],
   }),
   product({
@@ -134,6 +155,7 @@ export const PRODUCTS: Product[] = [
     categorySlug: "robes", collection: "Édition", priceNum: 1380, badge: "Nouveau",
     tone: "#E8E0CF", bg: "#F5F0E5", kind: "dress-short", material: "Mousseline",
     composition: "100% mousseline de soie. Doublure cupro.",
+    images: photos("robes", "robe-aurelie", 3),
     colors: [C.ecru], sizes: ["34", "36", "38"],
   }),
   product({
@@ -141,6 +163,7 @@ export const PRODUCTS: Product[] = [
     categorySlug: "robes", collection: "Édition", priceNum: 1180,
     tone: "#1D1D1F", bg: "#F5F5F7", kind: "dress-short", material: "Sergé de laine",
     composition: "Laine vierge 96%, élasthanne 4%.",
+    images: photos("robes", "robe-margaux", 4),
     colors: [C.noir], sizes: DRESS_SIZES,
   }),
   product({
@@ -148,6 +171,7 @@ export const PRODUCTS: Product[] = [
     categorySlug: "robes", collection: "Capsule Soirée", priceNum: 1520,
     tone: "#1B2540", bg: "#E8E9EE", kind: "dress", material: "Satin duchesse",
     composition: "Satin duchesse 100% soie. Doublure cupro.",
+    images: photos("robes", "robe-iliane", 4),
     colors: [C.bleuNuit, C.noir, C.bordeaux], sizes: ["36", "38", "40"],
   }),
   product({
@@ -155,6 +179,7 @@ export const PRODUCTS: Product[] = [
     categorySlug: "robes", collection: "Capsule Soirée", priceNum: 1850, badge: "Édition limitée",
     tone: "#C9A96E", bg: "#F4ECDB", kind: "dress", material: "Tulle brodé",
     composition: "Tulle de soie brodé main. Doublure cupro.",
+    images: photos("robes", "robe-soraya", 3),
     colors: [C.champagne], sizes: ["36", "38"],
   }),
   product({
@@ -162,7 +187,17 @@ export const PRODUCTS: Product[] = [
     categorySlug: "robes", collection: "Édition", priceNum: 1220,
     tone: "#EDE5D5", bg: "#F5F0E5", kind: "dress-short", material: "Crêpe Georgette",
     composition: "100% crêpe Georgette de soie.",
+    images: photos("robes", "robe-olympe", 5),
     colors: [C.ecru, C.ivoire], sizes: DRESS_SIZES,
+  }),
+
+  product({
+    id: "p17", slug: "robe-leonie", name: "Robe Léonie", sub: "Satin de soie, bordeaux",
+    categorySlug: "robes", collection: "Capsule Soirée", priceNum: 1560, badge: "Nouveau",
+    tone: "#7A1E27", bg: "#F0E6E4", kind: "dress", material: "Satin de soie",
+    composition: "Satin de soie 100%. Doublure cupro. Tissu tissé à Côme, Italie.",
+    images: photos("robes", "robe-leonie", 2),
+    colors: [C.bordeaux, C.noir], sizes: ["36", "38", "40"],
   }),
 
   // ── Sacs ─────────────────────────────────────────────────────────────────

@@ -6,6 +6,7 @@ import { useCart } from "@/lib/cart-context";
 import { getCategory, isSizeAvailable, stockFor } from "@/lib/catalog";
 import { formatEUR } from "@/lib/format";
 import { Silhouette } from "./Silhouette";
+import { ProductImage } from "./ProductImage";
 
 function Accordion({
   title,
@@ -49,6 +50,19 @@ export function PDPInteractive({ product }: { product: Product }) {
   // Gallery placeholders — same silhouette, varied tones from the colour range.
   const tones = colors.length ? colors.map((c) => c.hex) : [product.tone];
 
+  // Galerie : vraies photos si disponibles, sinon silhouettes placeholder.
+  const hasPhotos = product.images.length > 0;
+  const slideCount = hasPhotos ? product.images.length : 5;
+  const go = (dir: number) =>
+    setActiveImg((i) => (i + dir + slideCount) % slideCount);
+  const [touchX, setTouchX] = useState<number | null>(null);
+  function onTouchEnd(endX: number) {
+    if (touchX === null) return;
+    const dx = endX - touchX;
+    if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1); // swipe gauche → suivante
+    setTouchX(null);
+  }
+
   // Real stock for the current attribute selection (taille × couleur).
   const selStock = stockFor(product, {
     color: colorName,
@@ -71,31 +85,82 @@ export function PDPInteractive({ product }: { product: Product }) {
     <div className="ml-pdp">
       <div className="ml-pdp__gallery">
         <div className="ml-pdp__thumbs">
-          {[0, 1, 2, 3, 4].map((i) => (
+          {Array.from({ length: slideCount }).map((_, i) => (
             <div
               key={i}
               className={`ml-pdp__thumb ${activeImg === i ? "is-active" : ""}`}
               onClick={() => setActiveImg(i)}
             >
-              <Silhouette
-                kind={product.kind}
-                tone={tones[i % tones.length]}
-                bg={product.bg}
-                full
-              />
+              {hasPhotos ? (
+                <ProductImage product={product} index={i} sizes="80px" />
+              ) : (
+                <Silhouette
+                  kind={product.kind}
+                  tone={tones[i % tones.length]}
+                  bg={product.bg}
+                  full
+                />
+              )}
             </div>
           ))}
         </div>
-        <div className="ml-pdp__main">
-          <Silhouette
-            kind={product.kind}
-            tone={tones[activeImg % tones.length]}
-            bg={product.bg}
-            full
-          />
+        <div
+          className="ml-pdp__main"
+          onTouchStart={(e) => setTouchX(e.touches[0].clientX)}
+          onTouchEnd={(e) => onTouchEnd(e.changedTouches[0].clientX)}
+        >
+          {hasPhotos ? (
+            <ProductImage
+              product={product}
+              index={activeImg}
+              sizes="(max-width: 768px) 100vw, 50vw"
+              priority
+            />
+          ) : (
+            <Silhouette
+              kind={product.kind}
+              tone={tones[activeImg % tones.length]}
+              bg={product.bg}
+              full
+            />
+          )}
           <span className="ml-badge is-light" style={{ top: 18, left: 18 }}>
             Édition numérotée · 12/40
           </span>
+
+          {slideCount > 1 && (
+            <>
+              <button
+                type="button"
+                aria-label="Photo précédente"
+                className="ml-gallery-nav ml-gallery-nav--prev"
+                onClick={() => go(-1)}
+              >
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M15 18l-6-6 6-6" />
+                </svg>
+              </button>
+              <button
+                type="button"
+                aria-label="Photo suivante"
+                className="ml-gallery-nav ml-gallery-nav--next"
+                onClick={() => go(1)}
+              >
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 6l6 6-6 6" />
+                </svg>
+              </button>
+              <div className="ml-gallery-dots">
+                {Array.from({ length: slideCount }).map((_, i) => (
+                  <span
+                    key={i}
+                    className={`ml-gallery-dot ${activeImg === i ? "is-active" : ""}`}
+                    onClick={() => setActiveImg(i)}
+                  />
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </div>
 

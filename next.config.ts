@@ -18,6 +18,10 @@ const nextConfig: NextConfig = {
   basePath,
   assetPrefix: basePath || undefined,
 
+  // Expose le base path au code client (next/image en mode `unoptimized` ne le
+  // préfixe PAS aux images de public/ — on l'applique nous-mêmes via lib/asset).
+  env: { NEXT_PUBLIC_BASE_PATH: basePath },
+
   // Pas d'optimiseur d'images serveur en statique.
   images: { unoptimized: true },
 
